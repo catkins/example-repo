@@ -10,7 +10,7 @@ git push
 [tasks.push-commit-loop]
 description = "Continuously generate and push a commit every 10 seconds"
 usage = '''
-flag "-s --seconds <seconds>" help="Seconds to sleep between commits" default="10"
+flag "--seconds <seconds>" help="Seconds to sleep between commits" default="10"
 '''
 run = """
 INTERVAL="${usage_seconds?}"
