@@ -1,0 +1,22 @@
+[tasks.push-commit]
+description = "Generate and push a random commit"
+run = """
+date -u '+%Y-%m-%dT%H:%M:%SZ' > TIMESTAMP
+git add TIMESTAMP
+git commit -m "chore: bump timestamp $(cat TIMESTAMP)"
+git push
+"""
+
+[tasks.push-commit-loop]
+description = "Continuously generate and push a commit every 10 seconds"
+usage = '''
+flag "-s --seconds <seconds>" help="Seconds to sleep between commits" default="10"
+'''
+run = """
+INTERVAL="${usage_seconds?}"
+
+while true; do
+  mise run push-commit
+  sleep "$INTERVAL"
+done
+"""
